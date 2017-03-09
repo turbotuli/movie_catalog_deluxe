@@ -3,7 +3,6 @@ require 'rspec'
 require 'capybara/rspec'
 require 'pry'
 require_relative '../server.rb'
-require_relative '../actors.rb'
 
 Capybara.app = Sinatra::Application
 
