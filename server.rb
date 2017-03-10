@@ -23,8 +23,10 @@ end
 
 get '/actors' do
   db_connection do |conn|
-    actors = conn.exec("SELECT actors.id, actors.name FROM actors
-      ORDER BY actors.name")
+    actors = conn.exec("SELECT actors.id, actors.name, COUNT(cast_members.actor_id) FROM actors
+      INNER JOIN cast_members ON cast_members.actor_id = actors.id
+      GROUP BY actors.id
+      ORDER BY actors.name;")
     @actors = actors.to_a
   end
 
@@ -89,6 +91,11 @@ get '/movies' do
   end
 
   erb :'movies/index'
+end
+
+get '/movies/search' do
+
+
 end
 
 
